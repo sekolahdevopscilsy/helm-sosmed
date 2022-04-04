@@ -1,0 +1,27 @@
+configMap:
+  name: chart-cm-sosmed
+
+labels:
+  app: sosmed
+
+port:
+  http: 80
+  mysql: 3306
+
+service:
+  name: "chart-svc-sosmed"
+  type: LoadBalancer
+
+pod:
+  name: "chart-sosmed"
+  phpSosmed:
+    name: php-sosmed
+    image: sekolahdevopscilsy/php-sosmed 
+  mysqlSosmed:
+    name: mysql-sosmed
+    image: sekolahdevopscilsy/mysql-sosmed
+    env:
+      MYSQL_ROOT_PASSWORD: 1234567890
+
+volumes:
+  name: volume-cm

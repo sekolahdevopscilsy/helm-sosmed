@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .Values.pod.name }}
+  labels:
+    app: {{ .Values.labels.app }}
+spec:
+  volumes:
+    - name: {{ .Values.volumes.name }}
+      configMap:
+        name: {{ .Values.configMap.name }}
+    
+  containers:
+  - name: {{ .Values.pod.phpSosmed.name }} 
+    image: {{ .Values.pod.phpSosmed.image }}
+    ports:
+    - containerPort: {{ .Values.port.http }}
+    volumeMounts:
+    - name: {{ .Values.volumes.name }}
+      mountPath: "/var/www/html/config.php"
+      subPath: "config.php"
+  
+  - name: {{ .Values.pod.mysqlSosmed.name }}
+    image: {{ .Values.pod.mysqlSosmed.image }} 
+    ports:
+    - containerPort: {{ .Values.port.mysql }}
+    env:
+      - name: MYSQL_ROOT_PASSWORD 
+        value: {{ .Values.pod.mysqlSosmed.env.MYSQL_ROOT_PASSWORD | quote }}
