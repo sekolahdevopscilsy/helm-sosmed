@@ -15,6 +15,5 @@ This chart uses load balancing service. So ensure your platform has provider to 
 
 To install this chart, simply run this command
 ```sh
-cd helm-sosmed
-helm install sosmed .
+helm install sosmed https://sekolahdevopscilsy.github.io/helm-sosmed
 ```
